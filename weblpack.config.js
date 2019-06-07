@@ -1,7 +1,7 @@
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
@@ -15,40 +15,37 @@ module.exports = {
     contentBase: './dist'
   },
   plugins: [
-    new UglifyJsPlugin({ sourceMap: true }),
+    new UglifyJsPlugin({
+      sourceMap: true
+    }),
     new CleanWebpackPlugin(['dist']),
+    new Dotenv(),
     new HtmlWebpackPlugin({
-      title: 'doctor-doctor-please',
+      title: 'DoctorSearch',
       template: './src/index.html',
       inject: 'body'
     })
   ],
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader',
+          'css-loader'
         ]
       },
       {
-       test: /\.(png|jpg|gif)$/i,
-       use: [
-         {
-           loader: 'url-loader',
-           options: {
-             limit: 8192
-           }
-         }
-       ]
-     },
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ]
+      },
       {
         test: /\.js$/,
         exclude: [
-                /node_modules/,
-                /spec/
-              ],
+          /node_modules/,
+          /spec/
+        ],
         loader: "eslint-loader"
       },
       {
@@ -59,7 +56,7 @@ module.exports = {
         ],
         loader: "babel-loader",
         options: {
-          presets: ['es2015']
+          presets: ['@babel/preset-env']
         }
       }
     ]
