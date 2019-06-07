@@ -1,0 +1,49 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- <script src="http://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="main.js"></script> -->
+  <title>Doctor Doctor Please</title>
+</head>
+
+<body class="container">
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Doctor Doctor Please</h1>
+      <p>You can use the form below to search for a doctor in Portland by your current illness/issue keyword or name. You don't need to fill out both fields.</p>
+        <form id="doctor-form">
+          <label for="illness">Search by Illness/Issue:</label>
+          <input id="illness" type="text">
+          <label for="name">Search by First and/or Last Name:</label>
+          <input id="firstName" type="text">
+
+          <button type="submit" class="btn-dark">Go</button>
+        </form><br>
+
+        <div class="showResults">
+          <p>Here are the Doctors in Portland that match your search:</p>
+          <div class="showFirstName"></div>
+          <div class="showLastName"></div>
+          <div class="showPractice"></div>
+          <div class="showAddress"></div>
+          <div class="showPhones"></div>
+          <div class="showWebsite"></div>
+          <div class="showNewPatients"></div>
+          <div class="showGender"></div>
+          <div class="showLanguages"></div>
+
+          <div class="noResults">
+
+          </div>
+          <div class="error">
+
+          </div>
+        </div>
+    </div>
+
+  </div>
+</body>
+
+</html>
