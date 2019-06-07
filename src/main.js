@@ -8,8 +8,8 @@ $(document).ready(function() {
   $("#doctor-form").submit(function(event) {
     event.preventDefault();
     let illness = $("#illness").val();
-    $('#illness').val("");
     let name = $("#name").val();
+    $('#illness').val("");
     $('#name').val("");
     $('#showResults').show();
 
