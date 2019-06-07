@@ -27,7 +27,7 @@ $(document).ready(function() {
       } else {
         $('.showFirstName').text(`First Name:  ${data.profile.first_name}`);
         $('.showLastName').text(`Last Name:  ${data.profile.last_name}`);
-        $('.showPractice').text(`Practice: ${data.practice}`);
+        $('.showPractice').text(`Practice: ${data.practice.name}`);
         $('.showAddress').text(`Address:  ${data.practice.visit_address}`);
         $('.showPhones').text(`Phone Number(s):  ${data.practice.phones}`);
         $('.showWebsite').text(`Website:  ${data.practice.website}`);
