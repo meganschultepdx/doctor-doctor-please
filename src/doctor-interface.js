@@ -11,7 +11,7 @@ $(document).ready(function() {
     $('#illness').val("");
     let name = $("#name").val();
     $('#name').val("");
-    $('#result').show();
+    $('#showResults').show();
 
     console.log(illness);
     console.log(name);
@@ -21,15 +21,20 @@ $(document).ready(function() {
 
     promise.then(function(response) {
       let body = JSON.parse(response);
-      $('.showFirstName').text(`First Name:  ${data.practice.profile.first_name}`);
-      $('.showLastName').text(`Last Name:  ${data.practice.profile.first_name}`);
-      $('.showPractice').text(`Practice: ${data.practice}`);
-      $('.showAddress').text(`Address:  ${data.practice.visit_address}`);
-      $('.showPhones').text(`Phone Number(s):  ${data.practice.phones}`);
-      $('.showWebsite').text(`Website:  ${data.practice.website}`);
-      $('.showNewPatients').text(`Accepts New Patients:  ${data.practice.accepts_new_patients}`);
-      $('.showGender').text(`Gender:  ${data.practice.profile.gender}`);
-      $('.showLanguages').text(`Languages:  ${data.practice.profile.languages}`);
+
+      if(body.meta.count === 0) {
+        $('.noResults').text('Sorry, there are no results that match your search.')
+      } else {
+        $('.showFirstName').text(`First Name:  ${data.profile.first_name}`);
+        $('.showLastName').text(`Last Name:  ${data.profile.last_name}`);
+        $('.showPractice').text(`Practice: ${data.practice}`);
+        $('.showAddress').text(`Address:  ${data.practice.visit_address}`);
+        $('.showPhones').text(`Phone Number(s):  ${data.practice.phones}`);
+        $('.showWebsite').text(`Website:  ${data.practice.website}`);
+        $('.showNewPatients').text(`Accepts New Patients:  ${data.practice.accepts_new_patients}`);
+        $('.showGender').text(`Gender:  ${data.profile.gender}`);
+        $('.showLanguages').text(`Languages:  ${data.profile.languages}`);
+      }
 
     }, function(error) {
       $('.error').text(`There was an error processing your request: ${error.message}`);
