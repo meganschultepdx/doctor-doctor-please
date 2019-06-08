@@ -25,15 +25,19 @@ $(document).ready(function() {
       if(body.meta.count === 0) {
         $('.noResults').text('Sorry, there are no results that match your search.')
       } else {
-        $('.showFirstName').text(`First Name:  ${body.data.profile.first_name}`);
-        $('.showLastName').text(`Last Name:  ${body.data.profile.last_name}`);
-        $('.showPractice').text(`Practice: ${body.data.practice.name}`);
-        $('.showAddress').text(`Address:  ${body.data.practice.visit_address}`);
-        $('.showPhones').text(`Phone Number:  ${body.data.practice.phones[0]}`);
-        $('.showWebsite').text(`Website:  ${body.data.practice.website}`);
-        $('.showNewPatients').text(`Accepts New Patients:  ${body.data.practice.accepts_new_patients}`);
-        $('.showGender').text(`Gender:  ${body.data.profile.gender}`);
-        $('.showLanguages').text(`Languages:  ${body.data.profile.languages}`);
+        body.data.forEach(function(doctor){
+          
+          }
+
+        })
+        for (let i=0; i<=data.length; i++) {
+        $('.showName').text(`First Name:  ${body.data[i].practices.name}`);
+        $('.showPractice').text(`Practice: ${body.data[i].practice.name}`);
+        $('.showAddress').text(`Address:  ${body.data[i].practice.visit_address}`);
+        $('.showPhones').text(`Phone Number:  ${body.data[i].practice.phones[0]}`);
+        $('.showWebsite').text(`Website:  ${body.data[i].practice.website}`);
+        $('.showNewPatients').text(`Accepts New Patients:  ${body.data[i].practice.accepts_new_patients}`);
+      }
       }
 
     }, function(error) {
