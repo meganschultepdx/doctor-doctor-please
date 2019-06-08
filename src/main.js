@@ -11,10 +11,7 @@ $(document).ready(function() {
     let name = $("#name").val();
     $('#illness').val("");
     $('#name').val("");
-    // $('#showResults').show();
-
-    console.log(illness);
-    console.log(name);
+    $('#title').show();
 
     let search = new DoctorSearch();
     let promise = search.getDoctor(illness, name);
@@ -23,20 +20,13 @@ $(document).ready(function() {
       let body = JSON.parse(response);
 
       if(body.meta.count === 0) {
-        $('.noResults').text('Sorry, there are no results that match your search.')
-        $('.showName').hide();
-        $('.showPractice').hide();
-        $('.showAddress').hide();
-        $('.showPhones').hide();
-        $('.showWebsite').hide();
-        $('.showAcceptsNew').hide();
-        $('.showLanguages').hide();
+        $('.showResults').text('Sorry, there are no results that match your search.');
 
       } else {
-        body.data.forEach(function(data){
+        body.data.forEach(function(data) {
           let acceptsNew = '';
           let website = '';
-          if (data.practices[1].website === undefined) {
+          if (data.practices[0].website === undefined) {
             website = 'No website listed';
           }
           if (data.practices[0].accepts_new_patients === true) {
@@ -45,13 +35,13 @@ $(document).ready(function() {
             acceptsNew = 'No'
           }
 
-          $('.showName').html(`<strong>Doctor's Name:</strong>  ${data.profile.first_name} ${data.profile.last_name}`);
-          $('.showPractice').html(`<strong>Practice:</strong> ${data.practices[0].name}`);
-          $('.showAddress').html(`<strong>Address:</strong>  ${data.practices[0].visit_address.street}<br> ${data.practices[0].visit_address.city}, ${data.practices[0].visit_address.state} ${data.practices[0].visit_address.zip}`);
-          $('.showPhones').html(`<strong>Phone Number:</strong>  ${data.practices[0].phones[0].number}`);
-          $('.showWebsite').html(`<strong>Website: </strong> ${website}`);
-          $('.showAcceptsNew').html(`<strong>Accepts New Patients:</strong>  ${acceptsNew}`);
-          $('.showLanguages').html(`<strong>Languages:</strong>  ${data.profile.languages[0].name}`);
+          $('.showResults').append(`<strong>Doctor's Name:</strong>  ${data.profile.first_name} ${data.profile.last_name}<br>
+          <strong>Practice:</strong> ${data.practices[0].name}<br>
+          <strong>Address:</strong>  ${data.practices[0].visit_address.street}<br> ${data.practices[0].visit_address.city}, ${data.practices[0].visit_address.state} ${data.practices[0].visit_address.zip}<br>
+          <strong>Phone Number:</strong>  ${data.practices[0].phones[0].number}<br>
+          <strong>Website: </strong> ${website}<br>
+          <strong>Accepts New Patients:</strong>  ${acceptsNew}<br>
+          <strong>Languages:</strong>  ${data.profile.languages[0].name}<br><br><br>`);
         },
 
         function(error) {
