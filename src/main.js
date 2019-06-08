@@ -40,11 +40,11 @@ $(document).ready(function() {
           $('#showResults').show();
           $('.showName').html(`<strong>Doctor's Name:</strong>  ${data.profile.first_name} ${data.profile.last_name}`);
           $('.showPractice').html(`<strong>Practice:</strong> ${data.practices[0].name}`);
-          $('.showAddress').html(`<strong>Address:</strong>  ${data.practices[1].visit_address.street}<br>${data.practices[1].visit_address.city}, ${data.practices[1].visit_address.state} ${data.practices[1].visit_address.zip}`);
-          $('.showPhones').html(`<strong>Phone Number:</strong>  ${data.practices[0].phones[0]}`);
+          $('.showAddress').html(`<strong>Address:</strong>  ${data.practices[0].visit_address.street}<br>${data.practices[0].visit_address.city}, ${data.practices[0].visit_address.state} ${data.practices[0].visit_address.zip}`);
+          $('.showPhones').html(`<strong>Phone Number:</strong>  ${data.practices[0].phones[0].number}`);
           $('.showWebsite').html(`<strong>Website: </strong> ${website}`);
           $('.showAcceptsNew').html(`<strong>Accepts New Patients:</strong>  ${acceptsNew}`);
-          $('.showLanguages').html(`<strong>Languages:</strong>  ${data.profile.languages[0]}`);
+          $('.showLanguages').html(`<strong>Languages:</strong>  ${data.profile.languages[0].name}`);
         },
 
         function(error) {
