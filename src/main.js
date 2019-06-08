@@ -11,10 +11,10 @@ $(document).ready(function() {
     let name = $("#name").val();
     $('#illness').val("");
     $('#name').val("");
-    $('#showResults').show();
 
     console.log(illness);
     console.log(name);
+    $('#showResults').show();
 
     let search = new DoctorSearch();
     let promise = search.getDoctor(illness, name);
@@ -25,23 +25,27 @@ $(document).ready(function() {
       if(body.meta.count === 0) {
         $('.noResults').text('Sorry, there are no results that match your search.')
       } else {
-        body.data.forEach(function(doctor){
-          
+        body.data.forEach(function(data){
+          let acceptsNew = '';
+          if (data.practices[0].accepts_new_patients === true) {
+            acceptsNew = 'Accepting New Patients: Yes';
+          } else {
+            'Accepting New Patients: No'
           }
 
-        })
-        for (let i=0; i<=data.length; i++) {
-        $('.showName').text(`First Name:  ${body.data[i].practices.name}`);
-        $('.showPractice').text(`Practice: ${body.data[i].practice.name}`);
-        $('.showAddress').text(`Address:  ${body.data[i].practice.visit_address}`);
-        $('.showPhones').text(`Phone Number:  ${body.data[i].practice.phones[0]}`);
-        $('.showWebsite').text(`Website:  ${body.data[i].practice.website}`);
-        $('.showNewPatients').text(`Accepts New Patients:  ${body.data[i].practice.accepts_new_patients}`);
-      }
-      }
+          $('.showName').append(`<strong>Doctor's Name:</strong>  ${data.profile.first_name}${data.profile.last_name}`);
+          $('.showPractice').text(`<strong>Practice:</strong> ${data.practices[0].name}`);
+          $('.showAddress').text(`<strong>Address:</strong>  ${data.practices[0].visit_address}`);
+          $('.showPhones').text(`<strong>Phone Number:</strong>  ${data.practices[0].phones[0]}`);
+          $('.showWebsite').text(`<strong>Website: </strong> ${data.practices[0].website}`);
+          $('.showAcceptsNew').text(`<strong>Accepts New Patients:</strong> ${data.practices[0].accepts_new_patients}`);
+          $('.showLanguages').text(`<strong>Languages:</strong>  ${data.profile.languages}`);
+        },
 
-    }, function(error) {
-      $('.error').text(`There was an error processing your request: ${error.message}`);
+        function(error) {
+          $('.error').text(`There was an error processing your request: ${error.message}`);
+        });
+        }
+      });
     });
   });
-});
