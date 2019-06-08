@@ -14,7 +14,6 @@ $(document).ready(function() {
 
     console.log(illness);
     console.log(name);
-    $('#showResults').show();
 
     let search = new DoctorSearch();
     let promise = search.getDoctor(illness, name);
@@ -24,22 +23,28 @@ $(document).ready(function() {
 
       if(body.meta.count === 0) {
         $('.noResults').text('Sorry, there are no results that match your search.')
+
       } else {
         body.data.forEach(function(data){
           let acceptsNew = '';
+          let website = '';
+          if (data.practices[1].website === undefined) {
+            website = 'No website listed';
+          }
           if (data.practices[0].accepts_new_patients === true) {
-            acceptsNew = 'Accepting New Patients: Yes';
+            acceptsNew = 'Yes';
           } else {
-            'Accepting New Patients: No'
+            acceptsNew = 'No'
           }
 
-          $('.showName').append(`<strong>Doctor's Name:</strong>  ${data.profile.first_name}${data.profile.last_name}`);
-          $('.showPractice').text(`<strong>Practice:</strong> ${data.practices[0].name}`);
-          $('.showAddress').text(`<strong>Address:</strong>  ${data.practices[0].visit_address}`);
-          $('.showPhones').text(`<strong>Phone Number:</strong>  ${data.practices[0].phones[0]}`);
-          $('.showWebsite').text(`<strong>Website: </strong> ${data.practices[0].website}`);
-          $('.showAcceptsNew').text(`<strong>Accepts New Patients:</strong> ${data.practices[0].accepts_new_patients}`);
-          $('.showLanguages').text(`<strong>Languages:</strong>  ${data.profile.languages}`);
+          $('#showResults').show();
+          $('.showName').html(`<strong>Doctor's Name:</strong>  ${data.profile.first_name} ${data.profile.last_name}`);
+          $('.showPractice').html(`<strong>Practice:</strong> ${data.practices[0].name}`);
+          $('.showAddress').html(`<strong>Address:</strong>  ${data.practices[1].visit_address.street}<br>${data.practices[1].visit_address.city}, ${data.practices[1].visit_address.state} ${data.practices[1].visit_address.zip}`);
+          $('.showPhones').html(`<strong>Phone Number:</strong>  ${data.practices[0].phones[0]}`);
+          $('.showWebsite').html(`<strong>Website: </strong> ${website}`);
+          $('.showAcceptsNew').html(`<strong>Accepts New Patients:</strong>  ${acceptsNew}`);
+          $('.showLanguages').html(`<strong>Languages:</strong>  ${data.profile.languages[0]}`);
         },
 
         function(error) {
