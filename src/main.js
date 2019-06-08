@@ -11,6 +11,7 @@ $(document).ready(function() {
     let name = $("#name").val();
     $('#illness').val("");
     $('#name').val("");
+    // $('#showResults').show();
 
     console.log(illness);
     console.log(name);
@@ -23,6 +24,13 @@ $(document).ready(function() {
 
       if(body.meta.count === 0) {
         $('.noResults').text('Sorry, there are no results that match your search.')
+        $('.showName').hide();
+        $('.showPractice').hide();
+        $('.showAddress').hide();
+        $('.showPhones').hide();
+        $('.showWebsite').hide();
+        $('.showAcceptsNew').hide();
+        $('.showLanguages').hide();
 
       } else {
         body.data.forEach(function(data){
@@ -37,10 +45,9 @@ $(document).ready(function() {
             acceptsNew = 'No'
           }
 
-          $('#showResults').show();
           $('.showName').html(`<strong>Doctor's Name:</strong>  ${data.profile.first_name} ${data.profile.last_name}`);
           $('.showPractice').html(`<strong>Practice:</strong> ${data.practices[0].name}`);
-          $('.showAddress').html(`<strong>Address:</strong>  ${data.practices[0].visit_address.street}<br>${data.practices[0].visit_address.city}, ${data.practices[0].visit_address.state} ${data.practices[0].visit_address.zip}`);
+          $('.showAddress').html(`<strong>Address:</strong>  ${data.practices[0].visit_address.street}<br> ${data.practices[0].visit_address.city}, ${data.practices[0].visit_address.state} ${data.practices[0].visit_address.zip}`);
           $('.showPhones').html(`<strong>Phone Number:</strong>  ${data.practices[0].phones[0].number}`);
           $('.showWebsite').html(`<strong>Website: </strong> ${website}`);
           $('.showAcceptsNew').html(`<strong>Accepts New Patients:</strong>  ${acceptsNew}`);
